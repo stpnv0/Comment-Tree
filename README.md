@@ -60,7 +60,7 @@
 ### Docker Compose
 
 ```bash
-git clone https://github.com/stpnv0/CommentTree.git
+git clone https://github.com/stpnv0/Comment-Tree.git
 cd CommentTree
 
 docker compose up -d --build

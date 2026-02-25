@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comment Tree</title>
+    <link rel="stylesheet" href="../static/style.css">
+</head>
+<body>
+<div class="container">
+    <h1>Comment Tree</h1>
+
+    <!-- Search -->
+    <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="Search comments...">
+        <button class="btn btn-primary" onclick="doSearch()">Find</button>
+        <button class="btn btn-outline" onclick="clearSearch()">Clear</button>
+    </div>
+
+    <!-- Search Results -->
+    <div id="searchResults" style="display:none">
+        <div class="search-results-header">
+            <h3>Search results</h3>
+            <button class="btn btn-outline btn-sm" onclick="clearSearch()">Back to tree</button>
+        </div>
+        <div id="searchList"></div>
+        <div class="pagination" id="searchPagination"></div>
+    </div>
+
+    <!-- New Root Comment Form -->
+    <div class="new-comment-form" id="treeView">
+        <h3>New comment</h3>
+        <div class="form-group">
+            <input type="text" id="rootAuthor" placeholder="Your name">
+        </div>
+        <div class="form-group">
+            <textarea id="rootBody" placeholder="Write a comment..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="createRootComment()">Post</button>
+    </div>
+
+    <!-- Error Display -->
+    <div id="errorMsg" class="error-msg" style="display:none"></div>
+
+    <!-- Comment Tree -->
+    <div id="commentTree"></div>
+    <div class="pagination" id="treePagination"></div>
+</div>
+
+<script src="../static/app.js"></script>
+</body>
+</html>

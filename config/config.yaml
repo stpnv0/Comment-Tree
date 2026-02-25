@@ -1,0 +1,29 @@
+server:
+  addr: ":8080"
+  read_timeout: "10s"
+  write_timeout: "10s"
+  idle_timeout: "60s"
+  shutdown_timeout: "15s"
+
+logger:
+  engine: "slog"
+  level: "info"
+
+gin:
+  mode: "debug"
+
+postgres:
+  host: "localhost"
+  port: 5432
+  user: "postgres"
+  password: "postgres"
+  database: "commenttree"
+  sslmode: "disable"
+  max_open_conns: 10
+  max_idle_conns: 5
+  conn_max_lifetime: "5m"
+
+retry:
+  attempts: 3
+  delay: "500ms"
+  backoff: 2

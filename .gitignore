@@ -1,0 +1,5 @@
+bin/
+/warehouse
+.env
+.idea/
+.DS_Store

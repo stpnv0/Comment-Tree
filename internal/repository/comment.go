@@ -266,11 +266,14 @@ func (r *CommentRepository) Search(
 	return comments, total, nil
 }
 
-// sanitizeSort — whitelist допустимых колонок для ORDER BY
-// защита от sql инъекций
+// sanitizeSort — whitelist допустимых выражений для ORDER BY.
+// Для path используется числовая сортировка через массив bigint,
+// чтобы "16" шло после "3", а не между "1" и "2" (лексикографически)
 func sanitizeSort(col string) string {
 	switch col {
-	case "created_at", "path", "author":
+	case "path":
+		return "array(SELECT s::bigint FROM unnest(string_to_array(path::text, '.')) s)"
+	case "created_at", "author":
 		return col
 	default:
 		return "created_at"

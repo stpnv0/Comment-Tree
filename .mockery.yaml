@@ -1,0 +1,17 @@
+packages:
+  github.com/stpnv0/CommentTree/internal/handler:
+    config:
+      dir: "{{.InterfaceDir}}/mocks"
+      pkgname: "mocks"
+      filename: "mock_{{.InterfaceName | snakecase}}.go"
+      structname: "Mock{{.InterfaceName}}"
+    interfaces:
+      CommentService:
+  github.com/stpnv0/CommentTree/internal/service:
+    config:
+      dir: "{{.InterfaceDir}}/mocks"
+      pkgname: "mocks"
+      filename: "mock_{{.InterfaceName | snakecase}}.go"
+      structname: "Mock{{.InterfaceName}}"
+    interfaces:
+      CommentRepository:

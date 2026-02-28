@@ -9,12 +9,11 @@ import (
 )
 
 type Config struct {
-	Server      ServerConfig   `yaml:"server"`
-	Postgres    PostgresConfig `yaml:"postgres"`
-	Logger      LoggerConfig   `yaml:"logger"`
-	Gin         GinConfig      `yaml:"gin"`
-	Retry       RetryConfig    `yaml:"retry"`
-	MaxBodySize int64          `yaml:"max_body_size"    env:"SERVER_MAX_BODY_SIZE" env-default:"1048576"` //1 MB
+	Server   ServerConfig   `yaml:"server"`
+	Postgres PostgresConfig `yaml:"postgres"`
+	Logger   LoggerConfig   `yaml:"logger"`
+	Gin      GinConfig      `yaml:"gin"`
+	Retry    RetryConfig    `yaml:"retry"`
 }
 
 type ServerConfig struct {

@@ -56,17 +56,17 @@ async function loadTree(page) {
 }
 
 function buildTree(comments) {
-    var map = {};
+    var idMap = {};
     var roots = [];
 
     comments.forEach(function(c) {
         c._children = [];
-        map[c.id] = c;
+        idMap[c.id] = c;
     });
 
     comments.forEach(function(c) {
-        if (c.parent_id && map[c.parent_id]) {
-            map[c.parent_id]._children.push(c);
+        if (c.parent_id && idMap[c.parent_id]) {
+            idMap[c.parent_id]._children.push(c);
         } else {
             roots.push(c);
         }

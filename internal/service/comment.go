@@ -3,8 +3,10 @@ package service
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"strings"
+	"unicode/utf8"
 
 	"github.com/stpnv0/CommentTree/internal/domain"
 	"github.com/wb-go/wbf/logger"
@@ -50,6 +52,9 @@ func (s *CommentService) Create(ctx context.Context, input domain.CreateCommentI
 			s.log.LogAttrs(ctx, logger.WarnLevel, "parent lookup failed",
 				logger.String("error", err.Error()),
 			)
+			if errors.Is(err, domain.ErrCommentNotFound) {
+				return domain.Comment{}, fmt.Errorf("%s: %w", op, domain.ErrParentNotFound)
+			}
 			return domain.Comment{}, fmt.Errorf("%s: %w", op, err)
 		}
 		if parent.Depth >= maxDepth {
@@ -161,10 +166,10 @@ func validateCreateInput(input domain.CreateCommentInput) error {
 	if input.Body == "" {
 		return fmt.Errorf("%w: body must not be empty", domain.ErrInvalidInput)
 	}
-	if len(input.Author) > 255 {
+	if utf8.RuneCountInString(input.Author) > 255 {
 		return fmt.Errorf("%w: author too long (max 255)", domain.ErrInvalidInput)
 	}
-	if len(input.Body) > 10000 {
+	if utf8.RuneCountInString(input.Body) > 10000 {
 		return fmt.Errorf("%w: body too long (max 10000)", domain.ErrInvalidInput)
 	}
 	if input.ParentID != nil && *input.ParentID <= 0 {
